@@ -60,7 +60,8 @@ public static void main(String[] args) {
     System.out.print("세 번째 정수 입력: ");
     int i3 = scanner.nextInt();
 
-    double result3 = (double)(i1+i2+i3)/3;
+    double result3 = (double)(i1+i2+i3) / 3;
+                    // i1+i2+i3 / 3.0
     System.out.println(result3);
 }
 }
