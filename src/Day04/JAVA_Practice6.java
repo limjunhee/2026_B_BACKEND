@@ -103,20 +103,20 @@ public class JAVA_Practice6 {
         int[] usageMinutes = {65, 30, 140, 420};
 
         for(int i = 0; i <= carNumbers.length - 1; i++){
-            int price = 0;
+            int fee = 0;
             if (usageMinutes[i] <= 30) {
-                price = 1000;
+                fee = 1000;
             } else {
                 int minutes = usageMinutes[i] - 30;
                 // System.out.println(minutes);
-                price = 1000 + 500 * (minutes / 10);
-                // System.out.println(price);
+                fee = 1000 + 500 * (minutes / 10);
+                // System.out.println(fee);
             }
 
-            if (price > 20000) {
-                price = 20000;
+            if (fee > 20000) {
+                fee = 20000;
             }
-            System.out.printf("%s : %d분 주차, 최종 요금 : %d원\n", carNumbers[i], usageMinutes[i], price);
+            System.out.printf("%s : %d분 주차, 최종 요금 : %d원\n", carNumbers[i], usageMinutes[i], fee);
         }
 
     }
