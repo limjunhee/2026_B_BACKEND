@@ -120,11 +120,6 @@ public class JAVA_Practice7 {
         System.out.printf("이름: %s\n", profile1.name);
         System.out.printf("이름: %d\n", profile1.age);
         System.out.printf("이름: %s\n", profile1.mbti);
-
-        profile1 = null;
-        System.out.print(profile1);
-        // System.out.print(profile1.name);
-        // System.out.print(profile1.age);
     }
 }
 
