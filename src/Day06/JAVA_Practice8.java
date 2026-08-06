@@ -27,13 +27,6 @@ public class JAVA_Practice8 {
     }
 }
 
-/*
- * [문제 5] Member 클래스 (기본 생성자 및 초기값 설정)
- * Member 클래스를 정의하세요. (멤버 변수: id, isLogin)
- * 멤버 변수의 타입은 적절하게 선택하시오.
- * Member 클래스에 기본 생성자를 만들고, 생성자 내부에서 id는 "guest", isLogin은 false로 초기화되도록 구현하세요.
- * main 함수에서 new Member()로 객체를 생성한 뒤, 초기화된 id와 isLogin 값을 출력하여 확인하세요.
- */
 class Book {
     String title;
     String author;
