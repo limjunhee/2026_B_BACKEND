@@ -29,13 +29,14 @@ public class test2 {
                 Post[] posts = review_repository.findAllPosts();
                 for (Post post : posts) {
                     if (post != null) {
-                        System.out.printf("리뷰내용 : %s , 점수 : %s \n", post.content, post.writer);
+                        System.out.printf("게시물내용 : %s , 게시물작성자 : %s \n", post.content, post.writer);
                     }
                 }
             } else if (ch == 3) {
                 scan.nextLine();
                 System.out.print("리뷰내용 : ");    String review = scan.nextLine();
                 System.out.print("리뷰점수 : ");        int score = scan.nextInt();
+                scan.nextLine();
                 System.out.print("리뷰작성일 : ");        String listDay = scan.nextLine();
 
                 reviewTable post = new reviewTable(review, score, listDay);
