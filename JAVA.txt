@@ -225,5 +225,37 @@ JS랑 동일
 
 [ MVC 패턴 ]
     1. 정의 : 소프트웨어 개발에서 사용되는 디자인 패턴으로, 세 가지 주요 역할 분리하여 코드의 모듈화(조각)
+    
     2. 목적 : 협업간의 코드와 파일들을 mvc패턴 따라 구성하여 효율성 높인다.
-    3. 장점 : 유지보수, 모듈화, 단일책임기능(SRP : 단일 책임 원칙) 등
+    
+    3. 장점 : 유지보수, 모듈화, 단일책임기능(SRP : 단일 책임 원칙 - 객체지향 5대원칙(SOLID) ) 등
+    
+    4. 단점 : 분리함에 따라 코드의 복잡도가 높다.
+    
+    5. 예시 : 
+        - 1인 식당: 사장이 혼자 서빙, 요리, 재료 준비함
+        - 직원이 있는 식당: 서빙 직원, 요리 직원, 재료 관리 직원 등등 각 역할별로 책임을 짐 -> 단일 책임 원칙
+    6. 사용처
+        - 웹/앱 백엔드 프레임워크에서 주로 사용함
+
+    7. 레이어/계층
+        VIEW : 입출력담당 HTML / CSS / JS / REACT/ FLUTTER 등
+        CONTROLLER : model 과 view 사이의 제어/로직/유효성검사/전달 담당, JAVA / PYTHON / NODE.JS
+        MODEL : 데이터관리담당, JAVA / PYTHON / NODE.JS
+
+    8. 이동 객체
+        DTO : 서로 다른 레이어/계층간에 데이터 객체. (getter and setter 지원)
+        VO : 서로 다른 레이어/계층간에 데이터 객체. (getter만 지원)
+
+    9. 흐름
+        게시물쓰기:     view <--DTO/VO--> CONTROLLER <--DTO/VO--> DAO/REPOSITORY <--> 데이터베이스(SQL)
+        게시물조회:     view <--DTO/VO--? CONTROLLER <--DTO/VO--> DAO/REPOSITORY <--> 데이터베이스(SQL)
+
+    10. 패키지구성
+        프로젝트 폴더
+            -> controller 폴더
+            -> view 폴더
+            -> model 폴더
+                -> DAO 폴더
+                -> DTO 폴더
+            -> AppStart 클래스
