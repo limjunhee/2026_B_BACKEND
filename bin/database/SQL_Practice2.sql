@@ -104,7 +104,14 @@ CREATE Table students(
 -- salary (급여): int unsigned, NULL 허용 안함
 -- hire_date (입사일): date, NULL 허용 안함
 -- department (부서): varchar(50)
-
+create table employees (
+    emp_id int AUTO_INCREMENT,
+    constraint PRIMARY KEY(emp_id),
+    emp_name VARCHAR(40) not null,
+    salary int not NULL,
+    hire_date DATE NOT NULL,
+    department VARCHAR(50)
+)
 -- [문제 7]
 -- 아래 조건에 맞는 boards 테이블을 생성하는 SQL을 작성하세요.
 -- 테이블명: boards
@@ -114,7 +121,14 @@ CREATE Table students(
 -- content (내용): text, NULL 허용 안함
 -- writer_id (작성자회원번호): int, Foreign Key → members(member_id)
 -- created_at (작성일): datetime, Default 현재 날짜/시간
-
+create table boards (
+    board_id int AUTO_INCREMENT,
+    constraint PRIMARY KEY (board_id),
+    title VARCHAR(200) not NULL,
+    writer_id int,
+    constraint Foreign Key (writer_id) REFERENCES members(member_id),
+    created_at DATETIME DEFAULT now()
+)
 -- [문제 8]
 -- 아래 조건에 맞는 comments 테이블을 생성하는 SQL을 작성하세요.
 -- 테이블명: comments
@@ -125,6 +139,16 @@ CREATE Table students(
 -- content (댓글내용): varchar(300), NULL 허용 안함
 -- created_at (작성일): datetime, Default 현재 날짜/시간
 
+create table comments (
+    comment_id int AUTO_INCREMENT,
+    constraint PRIMARY KEY (comment_id),
+    board_id int,
+    constraint Foreign Key (board_id) REFERENCES boards(board_id),
+    writer_id int,
+    constraint FOREIGN KEY (writer_id) REFERENCES members(member_id),
+    content VARCHAR(300) not NULL,
+    created_at DATETIME DEFAULT now()
+)
 -- [문제 9]
 -- 아래 조건에 맞는 payments 테이블을 생성하는 SQL을 작성하세요.
 -- 테이블명: payments
@@ -134,6 +158,16 @@ CREATE Table students(
 -- payment_amount (결제금액): int unsigned, NULL 허용 안함
 -- payment_method (결제수단): varchar(30)
 -- payment_date (결제일): datetime, Default 현재 날짜/시간
+
+create table payments (
+    payment_id BIGINT AUTO_INCREMENT,
+    constraint PRIMARY KEY (payment_id),
+    order_id BIGINT,
+    constraint FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    payment_amount int UNSIGNED not null,
+    payment_method VARCHAR(30),
+    payment_date DATETIME DEFAULT now()
+)
 
 -- [문제 10]
 -- 아래 조건에 맞는 reviews 테이블을 생성하는 SQL을 작성하세요.
@@ -145,3 +179,15 @@ CREATE Table students(
 -- rating (평점): tinyint unsigned, NULL 허용 안함
 -- review_text (리뷰내용): text
 -- created_at (작성일): datetime, Default 현재 날짜/시간
+
+create table reviews (
+    review_id int AUTO_INCREMENT,
+    constraint PRIMARY KEY (review_id),
+    product_id int,
+    constraint FOREIGN KEY (product_id) REFERENCES products (product_id),
+    member_id int,
+    constraint FOREIGN KEY (member_id) REFERENCES members (member_id),
+    rating TINYINT UNSIGNED not null,
+    review_text TEXT,
+    created_at DATETIME DEFAULT now()
+)
