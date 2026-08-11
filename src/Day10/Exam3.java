@@ -20,7 +20,7 @@ public class Exam3 {
         System.out.println("-=-=-=-=-=-=-=-=-=-=");
         // 3. 타입 변환
         상위클래스 obj3 = obj2;
-        obj3.show();
+        obj3.show(); 
         System.out.println(obj3.value1);
         System.out.println(obj3.value2);
         // System.out.println(obj3.value3);

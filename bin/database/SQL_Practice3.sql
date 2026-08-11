@@ -211,11 +211,13 @@ INSERT INTO books VALUES (1013, '데이터베이스 개론', '이영희', '컴�
 -- order_date : '2023-08-15'
 insert INTO orders VALUES (NULL, 1002, '최지훈', 1, '2023-08-15');
 -- [문제 4]books 테이블에서 book_id가 1004 인 도서의 price를 15000 으로 수정하세요.
+UPDATE books set price = 15000 WHERE book_id = 1004; -- 13800 -> 15000
 
 -- [문제 5]books 테이블에서 장르(genre)가 '소설' 인 도서의 price를기존 가격에서 2000원 인상하도록 수정하세요.(산술연산자 사용)
+UPDATE books set price = price + 2000 WHERE genre = '소설';
 
 -- [문제 6]books 테이블에서 재고(stock)가 NULL인 도서의 stock 값을 0 으로 수정하세요.
-
+UPDATE books set stock = 0 WHERE stock IS NULL;
 -- [문제 7]orders 테이블에서 고객명(customer)이 '이서연' 인 주문 데이터를 모두 삭제하세요.
 
 -- [문제 8]books 테이블에서 재고(stock)가 0 이하(<= 0) 인 도서를 삭제하세요.
