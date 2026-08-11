@@ -78,6 +78,11 @@ public class JAVA_Practice12 {
         // [8]
         Sword sword = new Sword();
         Gun gun = new Gun();
+        // Weapon weapon = new Weapon();
+        Character character = new Character();
+        character.use(sword);
+        character.use(gun);
+        // character.use(weapon);
     }
 }
 // [1]
