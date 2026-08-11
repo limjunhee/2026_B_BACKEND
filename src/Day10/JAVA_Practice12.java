@@ -68,8 +68,16 @@ public class JAVA_Practice12 {
         for( Beverage drink : array){
             drink.drink();
         }
-
+        /*
+         * [문제 8] 다형성을 활용한 매개변수
+         * 1. Weapon 클래스와 이를 상속받는 Sword, Gun 클래스를 만드세요. 각 클래스는 "무기로 공격합니다.",
+         * "검으로 공격합니다.", "총으로 공격합니다."를 출력하는 attack() 메소드를 가집니다. (오버라이딩 활용)
+         * 2. Weapon 타입의 매개변수를 받아 그 객체의 attack() 메소드를 호출하는 Character 클래스와 use(Weapon weapon) 메소드를 만드세요.
+         * 3. main 함수에서 Sword 객체와 Gun 객체를 생성한 뒤, 이 객체들을 Character의 use() 메소드에 인자로 전달하여 각기 다른 결과가 출력되는 것을 확인하세요.
+         */
         // [8]
+        Sword sword = new Sword();
+        Gun gun = new Gun();
     }
 }
 // [1]
@@ -160,15 +168,7 @@ class Coffee extends Beverage {
         System.out.println("커피를 마십니다.");
     }
 }
-/*
- * [문제 8] 다형성을 활용한 매개변수
- * 1. Weapon 클래스와 이를 상속받는 Sword, Gun 클래스를 만드세요. 각 클래스는 "무기로 공격합니다.",
- * "검으로 공격합니다.", "총으로 공격합니다."를 출력하는 attack() 메소드를 가집니다. (오버라이딩 활용)
- * 2. Weapon 타입의 매개변수를 받아 그 객체의 attack() 메소드를 호출하는 Character 클래스와 use(Weapon
- * weapon) 메소드를 만드세요.
- * 3. main 함수에서 Sword 객체와 Gun 객체를 생성한 뒤, 이 객체들을 Character의 use() 메소드에 인자로 전달하여
- * 각기 다른 결과가 출력되는 것을 확인하세요.
- */
+
 // [8]
 class Weapon {
     void attack(){
@@ -179,5 +179,16 @@ class Sword extends Weapon {
     @Override
     void attack() {
         System.out.println("검으로 공격합니다.");
+    }
+}
+class Gun extends Weapon {
+    @Override
+    void attack() {
+        System.out.println("총으로 공격합니다.");
+    }
+}
+class Character {
+    void use(Weapon weapon){
+        weapon.attack();
     }
 }
