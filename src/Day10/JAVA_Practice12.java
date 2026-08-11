@@ -1,15 +1,10 @@
 package Day10;
 
-/*[문제 7] 다형성을 활용한 객체 배열
-1. "음료를 마십니다."를 출력하는 drink() 메소드를 가진 Beverage 클래스를 만드세요.
-2. Beverage를 상속받는 Coke와 Coffee 클래스를 만들고, 각 클래스에서 drink() 메소드를 오버라이딩하여 "콜라를 마십니다.", "커피를 마십니다."를 출력하도록 하세요.
-3. main 함수에서 Beverage 타입의 배열을 생성하고, 그 안에 Coke 객체와 Coffee 객체를 저장하세요.
-4. 반복문을 사용하여 배열의 모든 요소를 꺼내 drink() 메소드를 호출하고, 각기 다른 결과가 출력되는 것을 확인하세요.*/
+import java.util.ArrayList;
 
-/*[문제 8] 다형성을 활용한 매개변수
-1. Weapon 클래스와 이를 상속받는 Sword, Gun 클래스를 만드세요. 각 클래스는 "무기로 공격합니다.", "검으로 공격합니다.", "총으로 공격합니다."를 출력하는 attack() 메소드를 가집니다. (오버라이딩 활용)
-2. Weapon 타입의 매개변수를 받아 그 객체의 attack() 메소드를 호출하는 Character 클래스와 use(Weapon weapon) 메소드를 만드세요.
-3. main 함수에서 Sword 객체와 Gun 객체를 생성한 뒤, 이 객체들을 Character의 use() 메소드에 인자로 전달하여 각기 다른 결과가 출력되는 것을 확인하세요.*/
+import Day09.종합예제2.controller.WaitingController;
+
+
 
 /*[문제 9] 필드와 메소드의 오버라이딩 차이
 1. String name = "상위"; 필드와 method() 메소드("상위 메소드" 출력)를 가진 SuperClass를 만드세요.
@@ -56,6 +51,25 @@ public class JAVA_Practice12 {
         Shape shape = new Circle();
         shape.draw();
 
+        // [6]
+        Vehicle vehicle = new Bus();
+        if (vehicle instanceof Bus) {
+            Bus bus = (Bus)vehicle;
+            bus.checkFare();
+        } else {
+            System.out.println("vehicle 변수는 Bus타입이 아닙니다.");
+        }
+
+        // [7]
+        ArrayList< Beverage > array = new ArrayList<>();
+        array.add(new Coke());
+        array.add(new Coffee());
+
+        for( Beverage drink : array){
+            drink.drink();
+        }
+
+        // [8]
     }
 }
 // [1]
@@ -117,18 +131,53 @@ class Circle extends Shape {
         System.out.println("원을 그립니다.");
     }
 }
-/*
- * [문제 6] instanceof와 강제 타입 변환 (Downcasting)
- * 1. Vehicle 클래스와 이를 상속받는 Bus 클래스를 만드세요. Bus 클래스에만 checkFare()
- * 메소드("요금을 확인합니다.")를 추가하세요.
- * 2. main 함수에서 Vehicle vehicle = new Bus(); 코드를 작성하세요.
- * 3. if문과 instanceof 연산자를 사용하여 vehicle 변수가 Bus 타입인지 확인하세요.
- * 4. 만약 Bus 타입이 맞다면, Bus 타입으로 강제 변환한 뒤 checkFare() 메소드를 호출하세요.
- */
+
 // [6]
 class Vehicle {
 
 }
 class Bus extends Vehicle {
+    void checkFare(){
+        System.out.println("요금을 확인합니다.");
+    }
+}
 
+// [7]
+class Beverage {
+    void drink(){
+        System.out.println("음료를 마십니다.");
+    }
+}
+class Coke extends Beverage {
+    @Override
+    void drink(){
+        System.out.println("콜라를 마십니다.");
+    }
+}
+class Coffee extends Beverage {
+    @Override
+    void drink(){
+        System.out.println("커피를 마십니다.");
+    }
+}
+/*
+ * [문제 8] 다형성을 활용한 매개변수
+ * 1. Weapon 클래스와 이를 상속받는 Sword, Gun 클래스를 만드세요. 각 클래스는 "무기로 공격합니다.",
+ * "검으로 공격합니다.", "총으로 공격합니다."를 출력하는 attack() 메소드를 가집니다. (오버라이딩 활용)
+ * 2. Weapon 타입의 매개변수를 받아 그 객체의 attack() 메소드를 호출하는 Character 클래스와 use(Weapon
+ * weapon) 메소드를 만드세요.
+ * 3. main 함수에서 Sword 객체와 Gun 객체를 생성한 뒤, 이 객체들을 Character의 use() 메소드에 인자로 전달하여
+ * 각기 다른 결과가 출력되는 것을 확인하세요.
+ */
+// [8]
+class Weapon {
+    void attack(){
+        System.out.println("무기로 공격합니다.");
+    }
+}
+class Sword extends Weapon {
+    @Override
+    void attack() {
+        System.out.println("검으로 공격합니다.");
+    }
 }
