@@ -2,20 +2,7 @@ package Day10;
 
 import java.util.ArrayList;
 
-import Day09.종합예제2.controller.WaitingController;
 
-
-
-/*[문제 9] 필드와 메소드의 오버라이딩 차이
-1. String name = "상위"; 필드와 method() 메소드("상위 메소드" 출력)를 가진 SuperClass를 만드세요.
-2. SuperClass를 상속받고, String name = "하위"; 필드와 method() 메소드("하위 메소드" 출력)를 가진 SubClass를 만드세요.
-3. SuperClass obj = new SubClass(); 로 객체를 생성한 뒤, obj.name과 obj.method()를 각각 호출했을 때의 결과를 확인하고, 왜 다른 결과가 나오는지 주석으로 설명하세요.*/
-
-/*[문제 10] 다중 상속 관계
-1. Device 클래스를 만드세요.
-2. Device를 상속받는 Electronic 클래스를 만드세요.
-3. Electronic을 상속받는 Laptop 클래스를 만드세요.
-4. main 함수에서 Laptop 객체를 생성한 뒤, 이 객체가 Electronic 타입과 Device 타입으로도 형 변환이 가능한지 instanceof 연산자로 확인하고 결과를 출력하세요.*/
 public class JAVA_Practice12 {
     public static void main(final String[] args) {
         // [1]
@@ -39,13 +26,11 @@ public class JAVA_Practice12 {
 
         // [4]
         Figure f1 = new Triangle(); // Triangle(하위) -> Figure(상위)
-        // f1.explain(); // error
-
+        // f1.explain(); // error, 상위 클래스엔 같은 메소드가 없어서
+        
         // 자식 타입(Triangle)의 객체를 부모 타입(Figure)의 참조 변수에 할당했다.
         // 하위 인스턴스를 만들면 상위 인스턴스역시 생성된다.
         // 두 클래스가 상하관계에 있기에 하나의 객체, 메서드가 여러 가지의 타입을 가질 수 있는 다형성을 가질 수 있다
-        // 업캐스팅(자동 타입 변환)을 통해 Triangle이라는 자식 타입을 Figure이라는 부모 타입의 참조변수에 할당할 수 있다.
-        // 그러나 이 경우 자식 클래스에 있던 메소드를 실행할 수는 없다.(explain)
 
         // [5]
         Shape shape = new Circle();
@@ -68,13 +53,7 @@ public class JAVA_Practice12 {
         for( Beverage drink : array){
             drink.drink();
         }
-        /*
-         * [문제 8] 다형성을 활용한 매개변수
-         * 1. Weapon 클래스와 이를 상속받는 Sword, Gun 클래스를 만드세요. 각 클래스는 "무기로 공격합니다.",
-         * "검으로 공격합니다.", "총으로 공격합니다."를 출력하는 attack() 메소드를 가집니다. (오버라이딩 활용)
-         * 2. Weapon 타입의 매개변수를 받아 그 객체의 attack() 메소드를 호출하는 Character 클래스와 use(Weapon weapon) 메소드를 만드세요.
-         * 3. main 함수에서 Sword 객체와 Gun 객체를 생성한 뒤, 이 객체들을 Character의 use() 메소드에 인자로 전달하여 각기 다른 결과가 출력되는 것을 확인하세요.
-         */
+
         // [8]
         Sword sword = new Sword();
         Gun gun = new Gun();
@@ -83,6 +62,27 @@ public class JAVA_Practice12 {
         character.use(sword);
         character.use(gun);
         // character.use(weapon);
+
+        //[9]
+        SuperClass obj = new SubClass();    // 상위 메소드 타입으로 하위 메소드 출력
+        System.out.println(obj.name);       // 상위 메소드 멤버변수가 출력됨
+        obj.method();                       // 하위 메소드 메소드가 실행됨
+
+        // obj는 상위 클래스 타입으로 생성된 하위 클래스 변수이다.
+        // 하위 클래스에서 상위 클래스로 업캐스팅(자동 타입 변환)될 경우, 클래스들끼리 상속관계에 있으므로 상위 클래스 타입이지만
+        // 하위 메소드를 그대로 불러올 수 있다. 하지만 하위 클래스의 멤버변수는 지역변수처럼 오직 하위 클래스에서만 사용되는 변수이기 때문에
+        // 상위 클래스 타입인 obj.name은 "상위"일 수 밖에 없다. 
+
+        // [10]
+        Laptop laptop = new Laptop();
+        System.out.println( laptop instanceof Electronic); // true
+        System.out.println(laptop instanceof Device); // true
+        Electronic electronic = laptop;
+        Device device = laptop;
+
+        laptop.call();
+        electronic.call();
+        device.call(); // 타입만 변환했을 뿐 메소드는 그대로 Laptop 것을 불러온다
     }
 }
 // [1]
@@ -195,5 +195,38 @@ class Gun extends Weapon {
 class Character {
     void use(Weapon weapon){
         weapon.attack();
+    }
+}
+
+// [9]
+class SuperClass {
+    String name = "상위";
+    void method(){
+        System.out.println("\"상위 메소드\" 출력");
+    }
+}
+
+class SubClass extends SuperClass {
+    String name = "하위";
+
+    void method() {
+        System.out.println("\"하위 메소드\" 출력");
+    }
+}
+
+// [10]
+class Device {
+    void call(){
+        System.out.println("클래스 Device");
+    }
+}
+class Electronic extends Device{
+    void call() {
+        System.out.println("클래스 Electronic");
+    }
+}
+class Laptop extends Electronic{
+    void call() {
+        System.out.println("클래스 Laptop");
     }
 }
