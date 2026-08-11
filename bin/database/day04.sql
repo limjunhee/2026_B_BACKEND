@@ -125,8 +125,56 @@ select * from buy;
 # [1] Group절
 SELECT * from buy;
 
-select * from buy GROUP BY bpname; --제품명(bpname) 기준으로 그룹 모든 필드 조회 [오류]
+-- select * from buy GROUP BY bpname; --제품명(bpname) 기준으로 그룹 모든 필드 조회 [오류]
 select bpname from buy GROUP BY bpname; -- 제품명(bpname) 기준으로 그룹하고 bpname 필드만 조회
 
 # * 그룹 당 하나의 대표값만 조회
-SELECT bpname , mid FROM buy GROUP BY bpname; --[오류]
+-- SELECT bpname , mid FROM buy GROUP BY bpname; --[오류]
+
+# [2] 기초 집계함수
+select sum ( bamount ) FROM buy;    -- 합계
+
+select avg(bamount) FROM buy;       -- 평균
+
+select min(bamount) FROM buy;       -- 최솟값
+
+select max(bamount) FROM buy;       -- 최댓값
+
+select count(bamount) FROM buy;     -- count( 필드명 ) 레코드수(null 제외)
+
+select count (*) from buy;          -- count( 필드명 ) 레코드수(null 포함)
+
+# [3] 그룹절과 집계함수 , 그룹( ~~별, ~~끼리 )
+select mid, sum(bamount) 
+    from buy GROUP BY mid;-- 1) mid 기준으로 그룹하여 총 구매수량(bamount)
+
+select mid, sum(bamount * bprice ) 구매금액
+    from buy GROUP BY mid; -- 2) mid 기준으로 총 구매금액( 수량 * 가격 )
+
+select count(*), mid 
+    from buy GROUP BY mid;-- 3) mid(회원PK) 기준 별 판매 횟수
+
+# [4] 그룹절의 조건절 /// where 그룹 전 조건 [vs] having 그룹 후 조건
+select *  from buy WHERE bamount < 3; -- 구매 수량이 3 초과이면 
+select mid, sum( bamount ) 총구매수량 from buy GROUP BY mid having 총구매수량 > 5;
+    
+# where절에서는 필드 별칭 사용이 되지 않는다.
+-- select mid, sum(bamount) 총구매수량 from mid where 총구매수량 > 5 GROUP BY mid; -- [오류]
+
+# [5] order by 정렬, desc 내림차순 , asc 오름차순(기본값)
+select * from member ORDER BY mdebut;
+
+select * from member ORDER BY mdebut DESC;
+# [*] 다중정렬이란? 첫 번째 정렬 후 첫 번째 정렬 필드 기준으로 중복이 존재한 경우 중복끼리 2차 정렬하는 것.
+
+-- 1차정렬 지역(maddr) 먼저 정렬하고 만약에 지역 필드 내 *동일한 값끼리* 2차 정렬( mdebut ) 한다.
+select * from member order by maddr desc , mdebut asc; 
+
+# [6] limit: 결과 레코드 제한, *페이징처리*
+select * from member; -- 10개
+select * from member limit 2; -- 1 ~ 2(2)
+
+select * from member limit 0, 2; -- (0번부터 2개)(2)
+
+select * from member limit 5, 5; -- 5번부터 5개(5)
+-- [순서] select 필드명 from 테이블명 where 조건절 group by 그룹필드 having 그룹조건 order by 정렬필드 limit 시작인덱스, 개수;
