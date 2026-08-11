@@ -219,21 +219,24 @@ UPDATE books set price = price + 2000 WHERE genre = '소설';
 -- [문제 6]books 테이블에서 재고(stock)가 NULL인 도서의 stock 값을 0 으로 수정하세요.
 UPDATE books set stock = 0 WHERE stock IS NULL;
 -- [문제 7]orders 테이블에서 고객명(customer)이 '이서연' 인 주문 데이터를 모두 삭제하세요.
-
+DELETE FROM orders WHERE customer = '이서연';
 -- [문제 8]books 테이블에서 재고(stock)가 0 이하(<= 0) 인 도서를 삭제하세요.
-
+DELETE FROM books WHERE stock <= 0;
 -- [문제 9]orders 테이블에서 주문수량(order_qty)이 3 이상(>=) 인 주문 데이터를 삭제하세요.
-
+DELETE FROM orders WHERE order_qty >= 3;
 -- [문제 10]books 테이블에서 모든 도서의 모든 컬럼을 조회하세요.
+select * from books;
 
 -- [문제 11]books 테이블에서 title, price 컬럼만 조회하세요.
+SELECT title, price from books;
 
 -- [문제 12]books 테이블에서 price가 20000 초과(>) 인 도서의 title, price를 조회하세요.
+SELECT price, title from books WHERE price > 20000;
 
 -- [문제 13]books 테이블에서 price가 15000 이상(>=) 이고 stock이 10 이상(>=) 인 도서의 title, price, stock을 조회하세요.
-
+select title, price, stock from books WHERE price >= 15000 AND stock >= 10;
 -- [문제 14] books 테이블에서 장르(genre)가 '컴퓨터' 또는 '경제' 인 도서의 title, genre를 조회하세요. (IN 연산자 사용)
-
+SELECT title, genre FROM books
 -- [문제 15] books 테이블에서 장르(genre)가 '소설'이 아닌 도서의 모든 정보를 조회하세요. (NOT 사용)
 
 -- [문제 16] books 테이블에서 재고(stock)가 NULL인 도서의 title, stock을 조회하세요.(IS NULL 사용)

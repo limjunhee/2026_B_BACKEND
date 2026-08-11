@@ -9,3 +9,24 @@
     - DML 데이터 조작어 : 테이블 내 데이터들을 조작할 때 사용 -> select insert update delete
     - DCL 데이터 제어어 : 데이터베이스 접근권한 / 계정관리  -> grant revoke
     - TCL 트랜잭션 제어어 : DML 실행 결과를 취소하거나 적용함
+
+[ 메타데이터 ]
+    show databases;
+    user 데이터베이스명;
+    describe 테이블명; 
+
+[ DDL ]
+    DROP:
+        drop database if exists 데이터베이스명;
+        drop table if exists 테이블명;
+    CREATE:
+        create database if exists 데이터베이스명;
+        create table 테이블명( 필드명 타입 제약조건 );
+    ALTER:
+        alter table 테이블명 add 필드명 새로운타입;
+        alter table 테이블명 modify 필드명 새로운타입;
+        alter table 테이블명 change 기존필드명 새로운필드명 새로운타입;
+    RENAME:
+        rename table 테이블명 to 새로운테이블명;
+    TRUNCATE:
+        truncate table 초기화할테이블이름;

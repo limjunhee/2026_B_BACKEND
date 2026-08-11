@@ -1,11 +1,5 @@
 package Day10;
 
-/*[문제 6] instanceof와 강제 타입 변환 (Downcasting)
-1. Vehicle 클래스와 이를 상속받는 Bus 클래스를 만드세요. Bus 클래스에만 checkFare() 메소드("요금을 확인합니다.")를 추가하세요.
-2. main 함수에서 Vehicle vehicle = new Bus(); 코드를 작성하세요.
-3. if문과 instanceof 연산자를 사용하여 vehicle 변수가 Bus 타입인지 확인하세요.
-4. 만약 Bus 타입이 맞다면, Bus 타입으로 강제 변환한 뒤 checkFare() 메소드를 호출하세요.*/
-
 /*[문제 7] 다형성을 활용한 객체 배열
 1. "음료를 마십니다."를 출력하는 drink() 메소드를 가진 Beverage 클래스를 만드세요.
 2. Beverage를 상속받는 Coke와 Coffee 클래스를 만들고, 각 클래스에서 drink() 메소드를 오버라이딩하여 "콜라를 마십니다.", "커피를 마십니다."를 출력하도록 하세요.
@@ -40,7 +34,6 @@ public class JAVA_Practice12 {
         // [2]
         Cat cat1 = new Cat();
         cat1.makeSound();
-        // Override 뺐는데 왜 고양이가 운다 출력되는지?
 
         // [3]
         Computer com1 = new Computer();
@@ -50,11 +43,12 @@ public class JAVA_Practice12 {
 
 
         // [4]
-        Figure f1 = new Triangle();
+        Figure f1 = new Triangle(); // Triangle(하위) -> Figure(상위)
         // f1.explain(); // error
 
-        // 자식 타입(Trigangle)의 객체를 부모 타입(Figure)의 참조 변수에 할당했다.
-        // 두 클래스가 상하관계에 있기 때문에 하나의 객체, 메서드가 여러 가지의 타입을 가질 수 있는 다형성을 가질 수 있기 때문에
+        // 자식 타입(Triangle)의 객체를 부모 타입(Figure)의 참조 변수에 할당했다.
+        // 하위 인스턴스를 만들면 상위 인스턴스역시 생성된다.
+        // 두 클래스가 상하관계에 있기에 하나의 객체, 메서드가 여러 가지의 타입을 가질 수 있는 다형성을 가질 수 있다
         // 업캐스팅(자동 타입 변환)을 통해 Triangle이라는 자식 타입을 Figure이라는 부모 타입의 참조변수에 할당할 수 있다.
         // 그러나 이 경우 자식 클래스에 있던 메소드를 실행할 수는 없다.(explain)
 
@@ -76,7 +70,7 @@ class Animal {
     }
 }
 class Cat extends Animal{
-    // @Override
+    @Override
     void makeSound(){
         System.out.println("고양이가 야옹하고 웁니다.");
     }
@@ -111,22 +105,30 @@ class Triangle extends Figure{
     }
 }
 
-/*
- * [문제 5] 다형성과 오버라이딩
- * 1."도형을 그립니다."를 출력하는 draw() 메소드를 가진 Shape 클래스를 만드세요.
- * 2.Shape을 상속받고, draw() 메소드를 재정의하여 "원을 그립니다."를 출력하는 Circle 클래스를 만드세요.
- * 3.main 함수에서 Shape shape = new Circle(); 코드를 작성한 뒤, shape.draw()를 호출했을 때 어떤
- * 결과가 나오는지 확인하고 그 이유를 주석으로 설명하세요.
- */
-// [5]
+// [5] 메소드 오버라이드 시 메소드 위에 @Override 생략해도 오버라이드 가능함.( 생략 시 컴파일 과정에서 자동 할당 )
 class Shape {
     void draw(){
-
+        System.out.println("도형을 그립니다.");
     }
 }
-
 class Circle extends Shape {
+    @Override
     void draw(){
         System.out.println("원을 그립니다.");
     }
+}
+/*
+ * [문제 6] instanceof와 강제 타입 변환 (Downcasting)
+ * 1. Vehicle 클래스와 이를 상속받는 Bus 클래스를 만드세요. Bus 클래스에만 checkFare()
+ * 메소드("요금을 확인합니다.")를 추가하세요.
+ * 2. main 함수에서 Vehicle vehicle = new Bus(); 코드를 작성하세요.
+ * 3. if문과 instanceof 연산자를 사용하여 vehicle 변수가 Bus 타입인지 확인하세요.
+ * 4. 만약 Bus 타입이 맞다면, Bus 타입으로 강제 변환한 뒤 checkFare() 메소드를 호출하세요.
+ */
+// [6]
+class Vehicle {
+
+}
+class Bus extends Vehicle {
+
 }
