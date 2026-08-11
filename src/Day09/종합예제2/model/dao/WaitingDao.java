@@ -2,7 +2,6 @@ package Day09.종합예제2.model.dao;
 
 import java.util.ArrayList;
 
-import Day09.종합예제.model.dto.BoardDto;
 import Day09.종합예제2.model.dto.WaitingDto;
 
 public class WaitingDao {
@@ -13,7 +12,6 @@ public class WaitingDao {
     // * 데이터베이스 대신에 ArrayList 사용하여 데이터베이스 표/데이터 역할 *
     private ArrayList<WaitingDto> waitingList = new ArrayList<>();
 
-    private Scanner scan = new Scanner( System.in );
     // [1] 대기내역 추가 로직
     public boolean addWaiting(WaitingDto waitingDto){
         // 1. 매개변수 - controller로부터 저장할 정보 객체 받음
