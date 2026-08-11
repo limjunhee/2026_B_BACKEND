@@ -236,15 +236,16 @@ SELECT price, title from books WHERE price > 20000;
 -- [문제 13]books 테이블에서 price가 15000 이상(>=) 이고 stock이 10 이상(>=) 인 도서의 title, price, stock을 조회하세요.
 select title, price, stock from books WHERE price >= 15000 AND stock >= 10;
 -- [문제 14] books 테이블에서 장르(genre)가 '컴퓨터' 또는 '경제' 인 도서의 title, genre를 조회하세요. (IN 연산자 사용)
-SELECT title, genre FROM books
+SELECT title, genre FROM books WHERE genre IN ('컴퓨터', '경제');
 -- [문제 15] books 테이블에서 장르(genre)가 '소설'이 아닌 도서의 모든 정보를 조회하세요. (NOT 사용)
-
+select * from books WHERE NOT genre = '소설';
 -- [문제 16] books 테이블에서 재고(stock)가 NULL인 도서의 title, stock을 조회하세요.(IS NULL 사용)
-
+select title, stock from books WHERE stock is NULL;
 -- [문제 17] books 테이블에서 재고(stock)가 NULL이 아닌 도서의 title, stock을 조회하세요. (IS NOT NULL 사용)
-
+select title, stock from books WHERE stock is not NULL;
 -- [문제 18]books 테이블에서 price가 14000 ~ 18000 사이인 도서의 title, price를 조회하세요. (BETWEEN 사용)
-
+select title, price from books WHERE price BETWEEN 14000 and 18000;
 -- [문제 19] books 테이블에서 도서명(title)에 '자'가 포함된 도서의 title, author를 조회하세요. (LIKE '%자%' 사용)
-
+select title, author from books WHERE title LIKE '%자%';
 -- [문제 20] books 테이블에서 저자(author)가 '김'으로 시작하는 3글자인 도서의 title, author를 조회하세요. (LIKE '김__' 사용)
+select title, author from books WHERE author LIKE '김__';
