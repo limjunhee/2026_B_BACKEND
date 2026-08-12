@@ -2,13 +2,18 @@ package Day10;
 
 public class Exam4 {
     public static void main(String[] args) {
-        Car myCar = new Car();
-        myCar.tire = new Tire();
+        Car myCar = new Car();          // 인스턴스 1 생성 -> Day10.Car@54bedef2
+        System.out.println(myCar);
+        Car yourCar = new Car();        // 인스턴스 2 생성 -> Day10.Car@5caf905d
+        System.out.println(yourCar);
+
+        myCar.tire = new Tire();        // myCar에 Tire 대입
         myCar.run();
-        System.out.println("===============");
+        //yourCar.run();                  // yourCar에는 아직 타이어 안넣음[오류]
+        System.out.println("==============================");
         myCar.tire = new HankookTire();
         myCar.run();
-        System.out.println("===============");
+        System.out.println("==============================");
         myCar.tire = new KumhoTire();
         myCar.run();
         System.out.println(myCar.tire instanceof Tire); // true

@@ -26,7 +26,7 @@ public class JAVA_Practice12 {
 
         // [4]
         Figure f1 = new Triangle(); // Triangle(하위) -> Figure(상위)
-        // f1.explain(); // error, 상위 클래스엔 같은 메소드가 없어서
+        // f1.explain(); // error, 상위 클래스엔 같은 메소드가 없어서(오버라이딩 X)
         
         // 자식 타입(Triangle)의 객체를 부모 타입(Figure)의 참조 변수에 할당했다.
         // 하위 인스턴스를 만들면 상위 인스턴스역시 생성된다.
