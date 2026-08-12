@@ -64,14 +64,14 @@ public class JAVA_Practice12 {
         // character.use(weapon);
 
         //[9]
-        SuperClass obj = new SubClass();    // 상위 메소드 타입으로 하위 메소드 출력
-        System.out.println(obj.name);       // 상위 메소드 멤버변수가 출력됨
-        obj.method();                       // 하위 메소드 메소드가 실행됨
+        SuperClass obj = new SubClass();    // 상위 메소드 타입으로 하위 메소드 출력(업캐스팅)
+        System.out.println(obj.name);       // 상위 메소드 멤버변수가 출력됨 ("상위")
+        obj.method();                       // "하위 메소드" 메소드가 실행됨
 
         // obj는 상위 클래스 타입으로 생성된 하위 클래스 변수이다.
-        // 하위 클래스에서 상위 클래스로 업캐스팅(자동 타입 변환)될 경우, 클래스들끼리 상속관계에 있으므로 상위 클래스 타입이지만
-        // 하위 메소드를 그대로 불러올 수 있다. 하지만 하위 클래스의 멤버변수는 지역변수처럼 오직 하위 클래스에서만 사용되는 변수이기 때문에
-        // 상위 클래스 타입인 obj.name은 "상위"일 수 밖에 없다. 
+        // 하위 클래스에서 상위 클래스로 업캐스팅(자동 타입 변환)될 경우, 클래스들끼리 상속관계에 있으므로 상위 클래스 타입으로 변환할 수 있고 
+        // 하위 메소드를 그대로 불러올 수 있다. 
+        // 하지만 하위 클래스의 멤버변수는 지역변수처럼 오직 하위 클래스에서만 사용되는 변수이기 때문에 상위 클래스 타입인 obj.name은 "상위"일 수 밖에 없다. 
 
         // [10]
         Laptop laptop = new Laptop();
@@ -85,12 +85,12 @@ public class JAVA_Practice12 {
         device.call(); // 타입만 변환했을 뿐 메소드는 그대로 Laptop 것을 불러온다
     }
 }
-// [1]
+// [1] =========================================================
 class Person { String name; }
 class Student extends Person { int studentId; }
 
 
-// [2]
+// [2] =========================================================
 class Animal {
     void makeSound(){
         System.out.println("동물이 소리를 냅니다.");
@@ -103,7 +103,7 @@ class Cat extends Animal{
     }
 }
 
-// [3]
+// [3] =========================================================
 class Machine {
     Machine(){
         System.out.println("부모 클래스 생성자 실행");
@@ -116,7 +116,7 @@ class Computer extends Machine {
     }
 }
 
-// [4]
+// [4] =========================================================
 class Figure {
     Figure(){
         System.out.println("도형 생성");
@@ -145,7 +145,7 @@ class Circle extends Shape {
     }
 }
 
-// [6]
+// [6] =========================================================
 class Vehicle {
 
 }
@@ -155,7 +155,7 @@ class Bus extends Vehicle {
     }
 }
 
-// [7]
+// [7] =========================================================
 class Beverage {
     void drink(){
         System.out.println("음료를 마십니다.");
@@ -174,7 +174,7 @@ class Coffee extends Beverage {
     }
 }
 
-// [8]
+// [8] =========================================================
 class Weapon {
     void attack(){
         System.out.println("무기로 공격합니다.");
@@ -198,9 +198,10 @@ class Character {
     }
 }
 
-// [9]
+// [9] =========================================================
 class SuperClass {
     String name = "상위";
+
     void method(){
         System.out.println("\"상위 메소드\" 출력");
     }
@@ -214,7 +215,7 @@ class SubClass extends SuperClass {
     }
 }
 
-// [10]
+// [10] =========================================================
 class Device {
     void call(){
         System.out.println("클래스 Device");
