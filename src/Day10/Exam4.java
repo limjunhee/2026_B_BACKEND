@@ -7,18 +7,27 @@ public class Exam4 {
         Car yourCar = new Car();        // 인스턴스 2 생성 -> Day10.Car@5caf905d
         System.out.println(yourCar);
 
-        myCar.tire = new Tire();        // myCar에 Tire 대입
+        myCar.tire = new Tire();            // myCar에 Tire 대입
         myCar.run();
-        //yourCar.run();                  // yourCar에는 아직 타이어 안넣음[오류]
+        //yourCar.run();                    // yourCar에는 아직 타이어 없는 상태[오류]
         System.out.println("==============================");
-        myCar.tire = new HankookTire();
+        myCar.tire = new HankookTire();     // myCar에 HankookTire 대입
         myCar.run();
+        yourCar.tire = new Tire();          // yourCar에 Tire 대입
+        yourCar.run();
         System.out.println("==============================");
-        myCar.tire = new KumhoTire();
+        myCar.tire = new KumhoTire();       // myCar에 KumhoTire 대입
         myCar.run();
+        yourCar.tire = new HankookTire();    // yourCar에 HankookTire 대입
+        yourCar.run(); 
+
         System.out.println(myCar.tire instanceof Tire); // true
         System.out.println(myCar.tire instanceof KumhoTire); // true
         System.out.println(myCar.tire instanceof HankookTire); // false
+
+        System.out.println(yourCar.tire instanceof Tire); // true
+        System.out.println(yourCar.tire instanceof KumhoTire); // false
+        System.out.println(yourCar.tire instanceof HankookTire); // true
 
     } // main
 } // class end
