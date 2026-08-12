@@ -60,7 +60,25 @@ public class JAVA_Practice13 {
 
         // [7] ===============================================================
         System.out.println("===============================================================");
-        
+        Greeting g = new Greeting() {
+            public void welcome(){
+                System.out.println("환영합니다");
+            }
+        };
+
+        g.welcome();
+
+        // [8] ===============================================================
+        System.out.println("===============================================================");
+        Television television = new Television();
+        television.turnOn();
+        television.turnOff();
+        television.setMute(false);
+        television.setMute(true);
+
+        // [9] ===============================================================
+        System.out.println("===============================================================");
+        Calculator.plus(5, 15);
     }
 }
 
@@ -158,3 +176,41 @@ class MySqlDao implements DataAccessObject{
 }
 
 // [7] ===============================================================
+interface Greeting {
+    void welcome();
+}
+
+// [8] ===============================================================
+interface Device {
+    void turnOn();
+    
+    void turnOff();
+
+    public default void setMute(boolean mute){
+        System.out.println("무음 처리합니다.");
+    }
+}
+
+class Television implements Device {
+    @Override
+    public void turnOn() {
+        System.out.println("소리를 킵니다.");
+    }
+    @Override
+    public void turnOff() {
+        System.out.println("소리를 끕니다.");
+        
+    }
+}
+/*
+ * [문제 9] 정적 메소드 (Static Method)
+ * 1. Calculator 인터페이스를 만들고, 두 정수의 합을 반환하는 plus(int x, int y) 정적 메소드를 정의하세요.
+ * 2. main 함수에서 Calculator 인터페이스를 구현하는 클래스나 객체를 만들지 않고, Calculator.plus(10, 20)과
+ * 같이 인터페이스 이름으로 직접 정적 메소드를 호출하여 결과를 출력하세요.
+ */
+// [9] ===============================================================
+interface Calculator {
+    public static void plus(int x, int y){
+        System.out.println(x + y);
+    };
+}

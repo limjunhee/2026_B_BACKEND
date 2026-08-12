@@ -23,10 +23,9 @@ public class ProductController {
     // TODO 2: DAO의 findAll() 호출하여 결과를 받고 반환
     // 제품 전체 조회 컨트롤러
     public ArrayList<ProductDto> findAll() {
-        // <ProductDto> -> <Object> 업캐스팅?
-        // ㄴㄴ 다운캐스팅 <Object> -> <ProductDto>
-        
-        // Object의 하위 타입(ProductDto)의 배열을 하나 더 만들어서 그걸 전달한다.
+        // 다운캐스팅 <Object> -> <ProductDto>
+        // Object와 ProductDto는 상하관계이지만, 그걸 감싸주는 ArratList는 상하관계가 아니기 때문에, 바로 형변환 불가
+        // 해결법: Object의 하위 타입(ProductDto)의 ArrayList를 하나 더 만들어서 그걸 전달한다.
         ArrayList<Object> list = ib.findAll();
         ArrayList<ProductDto> result = new ArrayList<>();
         for(Object item : list){
