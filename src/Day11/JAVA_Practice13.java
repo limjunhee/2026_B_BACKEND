@@ -202,12 +202,7 @@ class Television implements Device {
         
     }
 }
-/*
- * [문제 9] 정적 메소드 (Static Method)
- * 1. Calculator 인터페이스를 만들고, 두 정수의 합을 반환하는 plus(int x, int y) 정적 메소드를 정의하세요.
- * 2. main 함수에서 Calculator 인터페이스를 구현하는 클래스나 객체를 만들지 않고, Calculator.plus(10, 20)과
- * 같이 인터페이스 이름으로 직접 정적 메소드를 호출하여 결과를 출력하세요.
- */
+
 // [9] ===============================================================
 interface Calculator {
     public static void plus(int x, int y){
