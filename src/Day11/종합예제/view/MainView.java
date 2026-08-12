@@ -15,7 +15,7 @@ public class MainView {
 
     private BoardController bc = BoardController.getInstance();
     private ProductController pc = ProductController.getInstance();
-    private Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in, "EUC-KR");
 
     public void run() {
         while (true) {
