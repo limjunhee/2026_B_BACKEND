@@ -9,7 +9,19 @@ public class JAVA_Practice13 {
         cat.makeSound();
         dog.makeSound();
 
+        Soundable sound = new Cat();
+        sound.makeSound();
+        sound = new Dog();
+        sound.makeSound();
+
         // [2] ===============================================================
+        // 상수는 인스턴스가 필요 없음
+        // static은 프로그램 시작 시 메모리 할당, 종료 시 제거
+        // 클래스명.상수명 / 인터페이스명.상수명
+        // 1. 첫글자가 대문자이면 인터페이스/클래스명, 2. 첫글자 소문자이면 변수/멤버변수.
+        //          MyCar                                   myCar, a.myCar
+        // 3. 전체가 대문자이면 상수                   3. 첫글자가 소문자이면 ( ) 함수/생성자
+        //          MYCAR                                   myCar( ), a.myCar( )
         System.out.println("===============================================================");
         System.out.println(RemoteControl.MAX_VOLUME);
         System.out.println(RemoteControl.MIN_VOLUME);
