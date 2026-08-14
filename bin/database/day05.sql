@@ -37,3 +37,46 @@ select * from table2;
 -- table : 1 2 3 4 5
 -- talbe : 1 1, 3 1, 4 1, 2 2, 5 2
 
+# [1] 교집합
+-- 주의: 두 개 이상의 테이블간 데카르트 곱으로 표현
+
+-- 1. where 조인조건
+SELECT * from table1, table2; -- table1(5개) * table2(5개) => 25, 2개 이상 테이블 조회
+SELECT * FROM table1 , table2 WHERE table1.num_pk = table2.num_fk; -- 5개
+SELECT * FROM table1 t1 , table2 t2 WHERE t1.num_pk = t2.num_fk; -- 별칭 이용함
+
+# 2. 테이블A inner join 테이블B on 조인조건
+SELECT * FROM table1 t1 INNER JOIN table2 t2 WHERE t1.num_pk = t2.num_fk; -- 별칭 이용함, 실무에서 추천 ★
+
+# 3. 테이블A join 테이블B on 조인조건
+SELECT * FROM table1 t1 JOIN table2 t2 on t1.num_pk = t2.num_fk;
+
+-- # 4. 테이블A natural join 테이블B  *전제조건: pk와 fk 필드명 같은경우
+-- SELECT * FROM table2 t1 NATURAL JOIN table2 t2;
+
+-- # 5. 테이블A join 테이블B using (필드명) *전제조건: pk와 fk 필드명 같은 경우
+-- select * from table1 t1 JOIN table2 t2 USING( num );
+
+# 3개 이상 테이블 조인
+-- select * from table1 t1 inner join table2 t2 on 조인조건 inner join table3 t3 on 조인조건
+
+#OUTER JOIN
+# 1. 테이블A left outer join 테이블B on, 왼쪽 테이블에 모든 레코드와 오른쪽 테이블의 교집합 되는 부분만 조회
+SELECT * FROM table1 t1 LEFT OUTER JOIN table2 t2 on t1.num_pk = t2.num_fk; -- 8개
+
+# 2. 테이블A RIGHT OUTER JOIN 테이블B on, 오른쪽 테이블에 모든 레코드와 왼쪽 테이블의 교집합 되는 부분만 조회
+SELECT * from table1 t1 RIGHT OUTER JOIN table2 t2 on t1.num_pk = t2.num_fk; -- 5개
+
+# RIGHT 생략 가능
+SELECT * from table1 t1 RIGHT OUTER JOIN table2 t2 on t1.num_pk = t2.num_fk; -- 5개
+
+# [2] 합집합
+# 테이블A union 테이블B : 중복 제외한 2개이상 테이블 합치기, oracle: full outer join
+-- union : 2개 이상의 select를 하나로 합치기 => left outer + (union) + right outer
+SELECT * FROM table1 t1 LEFT JOIN table2 t2 ON t1.num_pk = t2.num_fk UNION
+SELECT * FROM table1 t1 RIGHT JOIN table2 t2 on t1.num_pk = t2.num_fk;
+
+# [3] 차집합
+SELECT num_pk FROM table1 t1 LEFT JOIN table2 t2 ON t1.num_pk = t2.num_fk WHERE t2.num_fk is null;
+
+SELECT num_pk FROM table1 t1 RIGHT JOIN table2 t2 ON t1.num_pk = t2.num_fk WHERE t1.num_pk is null;
