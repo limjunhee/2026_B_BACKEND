@@ -17,6 +17,23 @@ public class WaitingView {
 
     private Scanner scan = new Scanner(System.in, "EUC-KR");
 
+    // [*] 메인 입출력
+    public void run() {
+        while (true) {
+            System.out.println("1. 대기인원 추가하기 | 2.대기현황 리스트 출력 | 3. 대기현황 개별수정");
+            int ch = scan.nextInt();
+            if (ch == 1) {
+                addWaiting();
+            } else if (ch == 2) {
+                findAllWaiting();
+            } else if (ch == 3){
+                editWaiting();
+            } else if (ch == 4){
+                deleteWaiting();
+            }
+        }
+    }
+
     // [1] 대기내역 작성 입출력
     public void addWaiting(){
         // 1. 입력
@@ -48,16 +65,30 @@ public class WaitingView {
         }
     }
 
-    // [*] 메인 입출력
-    public void run(){
-        while (true) {
-            System.out.println("1. 대기인원 추가하기 | 2.대기현황 리스트 출력");
-            int ch = scan.nextInt();
-            if (ch == 1) {
-                addWaiting();
-            } else if (ch == 2){
-                findAllWaiting();
-            }
+    // [3] 대기명단 개별 수정
+    public void editWaiting(){
+        System.out.print("[수정] 전화번호 입력: ");     String pn = scan.next();
+        System.out.print("[수정]변경할 인원 입력: ");   int new_c = scan.nextInt();
+
+        WaitingDto waitingDto = new WaitingDto(pn, new_c);
+
+        boolean result = wc.editWaiting(waitingDto);
+
+        if (result) {
+            System.out.println("수정 성공!");
+        } else {
+            System.out.println("수정 실패, 전화번호를 다시 확인하세요.");
+        }
+    }
+
+    public void deleteWaiting(){
+        System.out.print("명단에서 삭제하려는 연락처 입력: ");
+        String pn = scan.next();
+        boolean result = wc.deleteWaiting(pn);
+        if (result) {
+            System.out.println("삭제 성공!");
+        } else {
+            System.out.println("삭제 실패.");
         }
     }
 }

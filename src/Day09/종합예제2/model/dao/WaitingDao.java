@@ -32,14 +32,30 @@ public class WaitingDao {
     }
 
     // [3] 개별 대기내역 수정 로직
-    public boolean editWaiting(String phone_number){
-        // 1. 매개변수 - 전화번호
-        for(WaitingDto waiting : waitingList){
-            if (waiting.getPhone_number() == phone_number) { // 전화번호가 같다면?
-                
+    public boolean editWaiting(WaitingDto waitingDto){
+        // 1. 매개변수 - 찾고 있는 전화번호와 변경할 인원수
+        // 2. 결과(bool)를 반환할 변수
+        boolean result = false;
+        for(WaitingDto dto : waitingList){ //향상된 for문 이용
+            if (dto.getPhone_number().equals(waitingDto.getPhone_number())) {// 전화번호가 일치한다면?
+                int newdto = waitingDto.getCount();
+                dto.setCount(newdto);
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    // [4] 개별 대기내역 삭제 로직
+    public boolean deleteWaiting(String pn){
+        boolean result = false;
+        for(WaitingDto dto : waitingList){
+            if (dto.getPhone_number().equals(pn)) {
+                waitingList.remove(dto);
+                result = true;
             }
         }
 
-        return true;
+        return result;
     }
 }

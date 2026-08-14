@@ -33,4 +33,22 @@ public class WaitingController {
         ArrayList<WaitingDto> result = wc.findAllWaiting();
         return result;
     }
+
+    // [3] 대기내역 전체 수정 컨트롤러
+    public boolean editWaiting(WaitingDto waitingDto){
+        if (waitingDto == null) {
+            return false;
+        }
+        boolean result = wc.editWaiting(waitingDto);
+        return true;
+    }
+
+    // [3] 대기내역 전체 수정 컨트롤러
+    public boolean deleteWaiting(String pn) {
+        if (pn == null) {
+            return false;
+        }
+        boolean result = wc.deleteWaiting(pn);
+        return true;
+    }
 }
