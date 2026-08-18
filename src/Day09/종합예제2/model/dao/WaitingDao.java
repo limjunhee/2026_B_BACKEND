@@ -53,6 +53,7 @@ public class WaitingDao {
             if (dto.getPhone_number().equals(pn)) {
                 waitingList.remove(dto);
                 result = true;
+                break;
             }
         }
 

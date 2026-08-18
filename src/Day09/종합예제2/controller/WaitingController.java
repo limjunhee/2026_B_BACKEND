@@ -12,14 +12,14 @@ public class WaitingController {
     public static WaitingController getInstance(){ return instance; }
 
     // MVC 패턴 흐름의 dao 싱글톤 호출
-    private WaitingDao wc = WaitingDao.getInstance();
+    private WaitingDao wd = WaitingDao.getInstance();
 
     // [1] 대기내역 추가 컨트롤러
     public boolean addWaiting(WaitingDto waitingDto){
         // 1. 매개변수 - view로부터 저장할 정보 객체로 받음
 
         // 2. DAO에게 요청하고 응답받기
-        boolean result = wc.addWaiting(waitingDto);
+        boolean result = wd.addWaiting(waitingDto);
 
         // 3. DAO에게 받은 결과를 VIEW에게 응답하기
         return result;
@@ -30,25 +30,25 @@ public class WaitingController {
         // 1. 현재는 view로부터 받아올 매개변수 X
 
         // 2. dao에게 요청하고 응답받기
-        ArrayList<WaitingDto> result = wc.findAllWaiting();
+        ArrayList<WaitingDto> result = wd.findAllWaiting();
         return result;
     }
 
-    // [3] 대기내역 전체 수정 컨트롤러
+    // [3] 대기내역 개별 수정 컨트롤러
     public boolean editWaiting(WaitingDto waitingDto){
         if (waitingDto == null) {
             return false;
         }
-        boolean result = wc.editWaiting(waitingDto);
-        return true;
+        boolean result = wd.editWaiting(waitingDto);
+        return result;
     }
 
-    // [3] 대기내역 전체 수정 컨트롤러
+    // [4] 대기내역 개별 삭제 컨트롤러
     public boolean deleteWaiting(String pn) {
         if (pn == null) {
             return false;
         }
-        boolean result = wc.deleteWaiting(pn);
-        return true;
+        boolean result = wd.deleteWaiting(pn);
+        return result;
     }
 }
