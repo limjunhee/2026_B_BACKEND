@@ -55,7 +55,8 @@ VALUES (10, 1),
 
 -- [문제 1] 모든 제품의 제품명과 해당 제품의 카테고리명을 함께 조회하세요.
 -- select 제품명, 카테고리명 from pcategory inner join product where pcategory.카테고리번호_pk = product.카테고리번호_fk;
-select 제품명, 카테고리명 from pcategory inner join product on pcategory.카테고리번호_pk = product.카테고리번호_fk;
+select 제품명, 카테고리명 from pcategory inner join product 
+    on pcategory.카테고리번호_pk = product.카테고리번호_fk;
 
 -- [문제 2] '노트북' 카테고리에 속하는 모든 제품의 제품명과 제품가격을 조회하세요.
 -- select 제품명, 제품가격 from pcategory inner join product WHERE pcategory.카테고리번호_pk = product.카테고리번호_fk AND 카테고리명 = '노트북';
@@ -65,7 +66,8 @@ select 제품명, 제품가격 from pcategory
 
 -- [문제 3] 모든 제품의 제품명과 등록된 재고수량을 함께 조회하세요.
 -- SELECT 제품명, 재고수량 from product inner join stock WHERE product.제품번호_pk = stock.제품번호_fk;
-SELECT 제품명, 재고수량 from product inner join stock ON product.제품번호_pk = stock.제품번호_fk;
+SELECT 제품명, 재고수량 from product 
+    inner join stock ON product.제품번호_pk = stock.제품번호_fk;
 
 -- [문제 4] '그램 15인치' 제품의 모든 재고등록날짜와 재고수량을 조회하세요.
 -- SELECT 재고등록날짜, 재고수량 from product inner join stock WHERE product.제품번호_pk = stock.제품번호_fk and 제품명 = '그램 15인치';
@@ -77,13 +79,22 @@ SELECT 재고등록날짜, 재고수량 from product
 SELECT 제품명, 카테고리명, 재고수량 FROM product 
     inner join pcategory on product.카테고리번호_fk = pcategory.카테고리번호_pk 
     inner JOIN stock on stock.제품번호_fk = product.제품번호_pk;
+
 -- [문제 6] 모든 카테고리의 카테고리명과 해당 카테고리에 속한 제품명을 조회하세요. 만약 카테고리에 속한 제품이 없더라도 카테고리명은 모두 표시되도록 하세요.
-SELECT 카테고리명, 제품명 from pcategory LEFT JOIN product on pcategory.카테고리번호_pk = product.카테고리번호_fk
-UNION
-SELECT 카테고리명, 제품명 from pcategory RIGHT JOIN product on pcategory.카테고리번호_pk = product.카테고리번호_fk
+SELECT 카테고리명, 제품명 from pcategory 
+    INNER JOIN product on pcategory.카테고리번호_pk = product.카테고리번호_fk;
 
 -- [문제 7] 재고가 한 번도 등록되지 않은 제품의 제품명을 조회하세요.
+select 제품명 from product 
+    LEFT outer join stock on product.제품번호_pk = stock.제품번호_fk 
+    where stock.제품번호_fk is NULL;
 
 -- [문제 8] 각 카테고리별로 총 재고 수량의 합계를 카테고리명과 함께 조회하세요.
+select 카테고리번호_fk, sum(재고수량) from stock inner join product 
+    on stock.제품번호_fk = product.제품번호_pk 
+    GROUP BY product.카테고리번호_fk;
 
 -- [문제 9] 각 제품별로 총 재고 수량을 조회하고, 총 재고 수량이 많은 순서대로 정렬하여 제품명과 총재고수량을 표시하세요.
+select 제품명, sum(재고수량) from product 
+    inner join stock on product.제품번호_pk = stock.제품번호_fk 
+    GROUP BY product.제품명;

@@ -210,17 +210,58 @@ INSERT INTO orders VALUES ( NULL, 1010, '김민준', 1, '2023-07-03' );
 INSERT INTO orders VALUES ( NULL, 1004, '최수아', 2, '2023-07-10' );
 
 -- [문제 1 ] orders 테이블에서 고객(customer) 목록을 중복 없이 조회하는 SQL을 작성하세요. (GROUP BY 사용)
+SELECT customer from orders;
+SELECT customer from orders GROUP BY customer; -- 고객 이름으로 그룹화(5명)
+
 -- [문제 2 ] books 테이블에서 장르(genre) 목록을 중복 없이 조회하는 SQL을 작성하세요.
+select * FROM books;
+select genre FROM books GROUP BY genre; -- 장르 6개 출력
+
 -- [문제 3 ] orders 테이블에서 도서번호(book_id)별 주문이 존재하는 도서 목록을 조회하세요.
+select book_id from orders GROUP BY book_id; -- book_id 9개 출력
+
 -- [문제 4 ] books 테이블에서 저자(author)별로 그룹화하여 저자 목록만 조회하세요.
+select * from books;
+select author from books GROUP BY author; -- 저자 10명 출력
+
 -- [문제 5 ] orders 테이블에서 전체 주문 건수를 구하세요. (COUNT(*))
+SELECT COUNT(*) from orders; -- 레코드 24개
+
 -- [문제 6 ] orders 테이블에서 전체 주문수량(order_qty)의 합계를 구하세요. (SUM())
+SELECT * FROM orders;
+SELECT SUM(order_qty) FROM orders; -- 42 출력
+
 -- [문제 7 ] books 테이블에서 도서 가격(price)의 평균을 구하세요. (AVG())
+select * from books;
+select AVG(price) from books; -- 18809.0909 출력
+
 -- [문제 8 ] books 테이블에서 최고가/최저가 도서 가격을 각각 구하세요. (MAX(), MIN())
+select MAX(price), MIN(price) from books; -- max: 30000, min: 13800
+
 -- [문제 9 ] books 테이블에서 재고(stock)가 NULL이 아닌 도서 수를 구하세요. (COUNT(stock))
+SELECT * from books; -- 11 레코드 (stock이 NULL인 레코드 개수: 1)
+SELECT COUNT(stock) from books; -- 10 출력, 애초에 count가 null 빼고 세서 is not null 필요 X
+
 -- [문제 10 ] orders 테이블에서 고객별 주문 건수를 조회하세요. (customer, count)
+SELECT * FROM orders; -- 24레코드
+SELECT customer, COUNT(*) FROM orders GROUP BY customer; -- 6 + 5 + 5 + 5 + 3 = 24 
+
 -- [문제 11 ] orders 테이블에서 도서번호(book_id)별 총 주문수량 합계를 조회하세요. (book_id, sum)
+select * from orders;
+select book_id, SUM(order_qty) from orders GROUP BY book_id;
+
 -- [문제 12 ] orders에서 고객별 총 주문수량 합계가 5 이상인 고객만 조회하세요. ( 출력: customer, 총주문수량, 조건: HAVING 사용 )
+SELECT * FROM orders;
+SELECT customer, SUM(order_qty) FROM orders GROUP BY customer HAVING SUM(order_qty) >= 5;
+
 -- [문제 13 ] orders에서 도서번호(book_id)별 주문 건수가 3회 이상인 도서만 조회하세요.( 출력: book_id, 주문건수 )
+SELECT * from orders;
+SELECT book_id, SUM(order_qty) FROM orders GROUP BY book_id HAVING SUM(order_qty) >= 3;
+
 -- [문제 14 ] books 테이블에서 가격(price) 내림차순으로 정렬하여 조회하세요.
+SELECT * FROM books;
+SELECT price from books;
+SELECT price from books ORDER BY price DESC;
+
 -- [문제 15 ] books 테이블에서 가격(price) 내림차순 정렬 후 상위 3권만 조회하세요. (ORDER BY + LIMIT)
+SELECT price from books ORDER BY price DESC LIMIT 3;
