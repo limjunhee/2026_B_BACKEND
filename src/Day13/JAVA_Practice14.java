@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class JAVA_Practice14 {
     public static void main(String[] args) {
 
+        //차량 2대(\n 기준)
         String carParkingList = "3,211가6231,202608190930\n8,452하1234,202608171227";
         Scanner scan = new Scanner(System.in, "EUC-KR");
 
@@ -59,33 +60,45 @@ public class JAVA_Practice14 {
         }
     }
 
+    // [1] 차량 번호를 조회하여 주차된 위치 찾기
     static void findCarLocation(String carParkingList, String carNum){
-        String[] carArr = carParkingList.split("\n");
-        boolean result = false;
+        // 매개변수: 주차차량정보 문자열, 차량 번호(사용자가 찾으려고 입력한 문자열)
+
+        String[] carArr = carParkingList.split("\n"); // \n 기준으로 문자열 나눈 배열
+        boolean result = false; // 위치 파악 성공여부
+
+        // 하나하나 까보기(단위: 하나의 차량정보 전체)
+        // car : 하나의 차량 정보 전체(주차구역, 차량번호, 입차시각)
         for(String car : carArr){
             char location = car.charAt(0);
 
-            if (car.indexOf(carNum) != -1) {
+            if (car.indexOf(carNum) != -1) { // 
                 System.out.println("해당 차량의 위치: " + location);
                 result = true;
                 break;
             }
         }
 
-        if (!result) {
+        if (!result) { // 미등록 차량이면? (result == false면)
             System.out.println("미등록 차량입니다.");
         }
     }
 
+    // [2] 새로운 차량 입차하기
     static String addNewCar(String carParkingList, String newLocation, String carNumber){
+        // 매개변수: 주차차량정보 문자열, 차량 번호(사용자가 찾으려고 입력한 문자열)
         String[] carArr = carParkingList.split("\n");
         boolean result = true;
         String resultList = "";
         
+        // car : 하나의 차량 정보 전체(주차구역, 차량번호, 입차시각)
         for(String car : carArr){
-            char location = car.charAt(0);
-            String strloc = location+"";
-            if (newLocation.equals(strloc)) {
+            char location = car.charAt(0); // location: 주차구역만 뽑아감
+            String strloc = location+"";         // char -> String 변환하여 새로 지정
+            
+            // 새로 입차하려는 구역에 차량이 있는지 확인
+            // 
+            if (newLocation.equals(strloc)) { 
                 System.out.println("이미 주차중인 구역입니다.");
                 result = false;
                 break;
@@ -103,7 +116,7 @@ public class JAVA_Practice14 {
             resultBuilder.append(carNumber+",");                // [3] 차량번호 기입
             resultBuilder.append(newDay);                       // [4] 특정 형식으로 입차시간 기입
 
-            String newCarString = resultBuilder.toString();     // 빌더를 스트링으로 변환
+            String newCarString = resultBuilder.toString();     // 빌더를 스트링으로 변환하여 새 변수에 할당
             // System.out.println(newCarString);
 
             resultList = newCarString;                          // 결과 문자열에 담기
@@ -115,12 +128,12 @@ public class JAVA_Practice14 {
         return resultList; // 추가할 문자열 부분을 반환함
     }
 
+
+    // [3] 기존에 있던 차량 출차하기
     static String deleteCar(String carParkingList, String carNum){
         if (carParkingList.equals("")) {
             return "";
         }
-        int finalfee = 0;
-        String resultList = "";
         String deleteNow = "";
         
         // 문자열 줄바꿈 기준으로 분리
@@ -148,8 +161,8 @@ public class JAVA_Practice14 {
                 LocalDateTime nowTime = LocalDateTime.now(); // 현재 시각
 
                 // 단순 일(Day) 차이 기준으로 주차일 구하기
-                // .getYear = 연도를 int 형태로 반환, .getDayOfYear() = 해당 연도의 몇 번째 날인지(1~366, int) 반환
-                int inTotalDays = (inTime.getYear() * 365) + inTime.getDayOfYear();
+                // .getYear = 연도를 int 형태로 반환  /  .getDayOfYear() = 해당 연도의 몇 번째 날인지(1~366, int) 반환
+                int inTotalDays = (inTime.getYear() * 365) + inTime.getDayOfYear(); // 년도 * 365 -> n년도의 총 일수  /   해당 날짜는 1년 중 몇 번째 날인지 받아옴
                 int nowTotalDays = (nowTime.getYear() * 365) + nowTime.getDayOfYear();
                 int diffDays = nowTotalDays - inTotalDays; // 입차일시(과거) - 현재 = 이용일
 
@@ -190,7 +203,7 @@ public class JAVA_Practice14 {
 
         // 반복문 종료 후, 삭제할 부분이 없는 것으로 판별되면?
         if (deleteNow.equals("")) {
-            System.out.println("출차할 차량이 없습니다.");
+            System.out.println("해당 차량은 주차된 상태가 아닙니다.");
             return "";
         }
 
@@ -228,7 +241,7 @@ public class JAVA_Practice14 {
  * 기능: 새로운 차량의 주차 정보를 기존 데이터에 추가합니다.
  * 조건:
  * 이미 주차되어 있는 위치 번호에는 중복 주차할 수 없습니다
- * 입력: location (위치번호), carNumber (차량번호), dateTime (2입차일시)
+ * 입력: location (위치번호), carNumber (차량번호), dateTime (입차일시)
  * 출력/반환:
  * 차량이 입차한 경우 : 주차 위치 번호 (예: "3")
  * 차량이 입차가 없을 경우: 위치 번호에는 중복 주차할 수 없습니다. (위치 중복 시 입차 불가 메시지 출력)
