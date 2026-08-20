@@ -34,4 +34,4 @@ public class Exam1 {
 
 } //class Exam1 end
 
-// * class 밖에선 코드를 작성하지 말자. *
+// * class 밖에선 작동 코드를 작성하지 말자. (외부 클래스 작성용)*

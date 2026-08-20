@@ -42,6 +42,7 @@ public class Exam2 {
         // 4. 정해진 날짜/시간 객체 생성    LocalDateTime.of( ) : 오버로딩(매개변수에 따른 메소드 여러 개 가능)
         LocalDateTime localDateTime2 = LocalDateTime.of(2026, 8, 19, 11, 11, 30);
         System.out.println(localDateTime2);
+        System.out.println("==================");
 
         // 5. 정해진 형식으로 날짜/시간 표현 DateTimeFormatter.ofPattern( 패턴 );
         // 패턴 : y 연도 / M 달 / d 일 / h시 / m분 / s초    날짜/시간객체.format(패턴객체)

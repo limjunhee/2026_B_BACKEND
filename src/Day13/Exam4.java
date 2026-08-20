@@ -17,7 +17,6 @@ public class Exam4 {
         boolean value4 = random.nextBoolean(); System.out.println(value4);         // true/false 난수
 
         // [2] UUID , 범용 고유 식별자. 절대 중복 없는 난수 생성
-        // * 
         String uuid = UUID.randomUUID().toString();
         System.out.println( uuid ); // 86726571-95fc-4485-b826-90231e2596ca
     }
