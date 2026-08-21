@@ -1,6 +1,6 @@
 package Day01;
 
-import java.net.Socket;
+
 import java.util.Scanner;
 public class Exam3 {
     public static void main(String[] args) {
